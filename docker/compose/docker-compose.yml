@@ -1,0 +1,12 @@
+version: '3.8'
+
+services:
+  task_insider:
+    build:
+      context: ../../
+      dockerfile: docker/dockerfiles/pdf_summary_ai.Dockerfile
+    container_name: pdf_summary_ai
+    ports:
+      - "8080:8080"
+    env_file:
+      - ../../.env

@@ -1,4 +1,4 @@
-from dependency_injector.wiring import Provide
+from dependency_injector.wiring import Provide, inject
 from fastapi import APIRouter, Depends, File, Response, UploadFile
 
 from src.core.exceptions import (
@@ -14,6 +14,7 @@ router = APIRouter(prefix="/pdf")
 
 
 @router.post("/summary")
+@inject
 async def summary_pdf(
     file: UploadFile = File(...),
     pdf_summary_service: PDFSummaryService = Depends(

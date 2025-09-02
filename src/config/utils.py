@@ -6,6 +6,7 @@ from dotenv import load_dotenv
 from .base import ProjectAbout
 from .config import Config
 
+
 load_dotenv()
 
 
@@ -36,7 +37,9 @@ def read_config() -> Config:
     Returns:
         Config: Service configuration.
     """
-    about = _read_project_about(os.environ.get("PYPROJECT_PATH", "pyproject.toml"))
+    about = _read_project_about(
+        os.environ.get("PYPROJECT_PATH", "pyproject.toml")
+    )
     config = Config(version=about.version)
     if config.service_settings.name is None:
         config.service_settings.name = about.name

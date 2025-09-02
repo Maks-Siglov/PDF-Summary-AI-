@@ -1,6 +1,6 @@
 from fastapi import APIRouter, FastAPI
 
-from .pdf_summary import router as pdf_summary_router
+from .pdf import router as pdf_summary_router
 
 
 def setup_routes(app: FastAPI) -> None:

@@ -1,7 +1,6 @@
-from enum import Enum, StrEnum
+from enum import StrEnum
 
 from pydantic import BaseModel, Field
-from pydantic_settings import BaseSettings
 
 
 class CommonConfig(StrEnum):

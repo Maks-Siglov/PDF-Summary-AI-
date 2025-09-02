@@ -3,6 +3,7 @@ from dependency_injector.containers import WiringConfiguration
 from fastapi import FastAPI
 
 from src.config.config import Config
+from src.services.pdf.summary import PDFSummaryService
 
 
 class IoCContainer(containers.DeclarativeContainer):
@@ -10,6 +11,12 @@ class IoCContainer(containers.DeclarativeContainer):
     wiring_config = WiringConfiguration(packages=["src.api"])
 
     config: Config = providers.Configuration()
+
+    # SERVICES
+
+    pdf_summary_service: PDFSummaryService = providers.Singleton(
+        PDFSummaryService,
+    )
 
 
 async def startup_event(app: FastAPI) -> None:

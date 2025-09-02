@@ -10,7 +10,9 @@ from starlette.responses import JSONResponse
 from src.core.schemas.responses import ErrorResponse
 
 
-async def http_exception_handler(_: Request, exc: HTTPException) -> JSONResponse:
+async def http_exception_handler(
+    _: Request, exc: HTTPException
+) -> JSONResponse:
     """Handles HTTP exceptions.
 
     Args:
@@ -31,7 +33,9 @@ async def http_exception_handler(_: Request, exc: HTTPException) -> JSONResponse
     )
 
 
-async def value_error_handler(request: Request, exc: Exception) -> JSONResponse:
+async def value_error_handler(
+    request: Request, exc: Exception
+) -> JSONResponse:
     """Handles value exceptions.
 
     Args:
@@ -41,7 +45,9 @@ async def value_error_handler(request: Request, exc: Exception) -> JSONResponse:
     Returns:
         JSONResponse: Response for the exception.
     """
-    logger.error(f"ERROR handled by value_error_handler: 400 Bad Request: {exc}")
+    logger.error(
+        f"ERROR handled by value_error_handler: 400 Bad Request: {exc}"
+    )
     try:
         body = await request.json()
         logger.error(f"Request body: {body}")

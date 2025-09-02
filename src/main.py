@@ -7,6 +7,7 @@ import uvicorn
 from src.config.utils import read_config
 from src.system.entry import prepare_app
 
+
 config = read_config()
 logging.info(config.model_dump_json(indent=4))
 app = prepare_app(config)

@@ -2,8 +2,7 @@ from pydantic import Field
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 from src.config.base import CommonConfig, ServiceSettings
-
-# from src.config.external import ExternalSettings
+from src.config.pdf import PDFSettings
 
 
 class Config(BaseSettings):
@@ -17,8 +16,6 @@ class Config(BaseSettings):
 
     service_settings: ServiceSettings = Field(default_factory=ServiceSettings)
 
-    # external_services_settings: ExternalSettings = Field(
-    #     default_factory=ExternalSettings
-    # )
+    pdf_settings: PDFSettings = Field(default_factory=PDFSettings)
 
     version: str

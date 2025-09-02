@@ -2,7 +2,9 @@ from dependency_injector import containers, providers
 from dependency_injector.containers import WiringConfiguration
 from fastapi import FastAPI
 
+from src.client.openai import OpenAIClient
 from src.config.config import Config
+from src.prompt.system import SYSTEM_PROMPT
 from src.services.pdf.summary import PDFSummaryService
 
 
@@ -11,6 +13,16 @@ class IoCContainer(containers.DeclarativeContainer):
     wiring_config = WiringConfiguration(packages=["src.api"])
 
     config: Config = providers.Configuration()
+
+    # CLIENTS
+
+    openai_client: OpenAIClient = providers.Singleton(
+        OpenAIClient,
+        api_key=config.openai_settings.api_key,
+        system_prompt=SYSTEM_PROMPT,
+        model=config.openai_settings.model,
+        temperature=config.openai_settings.temperature,
+    )
 
     # SERVICES
 

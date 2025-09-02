@@ -2,6 +2,7 @@ from pydantic import Field
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 from src.config.base import CommonConfig, ServiceSettings
+from src.config.openai import OpenAISettings
 from src.config.pdf import PDFSettings
 
 
@@ -17,5 +18,7 @@ class Config(BaseSettings):
     service_settings: ServiceSettings = Field(default_factory=ServiceSettings)
 
     pdf_settings: PDFSettings = Field(default_factory=PDFSettings)
+
+    openai_settings: OpenAISettings = Field(default_factory=OpenAISettings)
 
     version: str

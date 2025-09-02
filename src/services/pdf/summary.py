@@ -24,7 +24,7 @@ class PDFSummaryService:
             raise TooLargeFileException()
 
         content = await file.read()
-        text_content, page_count = self.extract_text_from_pdf(content)
+        text_content = self.extract_text_from_pdf(content)
 
         if not text_content.strip():
             raise EmptyFileException()

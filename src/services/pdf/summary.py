@@ -3,6 +3,7 @@ import io
 import pdfplumber
 from fastapi import UploadFile
 
+from src.client.openai import OpenAIClient
 from src.core.exceptions import (
     EmptyFileException,
     TooLargeFileException,
@@ -12,8 +13,9 @@ from src.core.exceptions import (
 
 class PDFSummaryService:
 
-    def __init__(self, file_size_mb_limit: int):
+    def __init__(self, file_size_mb_limit: int, openai_client: OpenAIClient):
         self._file_size_mb_limit = file_size_mb_limit
+        self._openai_client = openai_client
 
     async def get_pdf_summary(self, file: UploadFile):
 
@@ -28,6 +30,8 @@ class PDFSummaryService:
 
         if not text_content.strip():
             raise EmptyFileException()
+
+        return await self._openai_client.generate_summary(text_content)
 
     @staticmethod
     def extract_text_from_pdf(pdf_content: bytes) -> str:

@@ -27,7 +27,9 @@ class IoCContainer(containers.DeclarativeContainer):
     # SERVICES
 
     pdf_summary_service: PDFSummaryService = providers.Singleton(
-        PDFSummaryService, file_size_mb_limit=config.pdf_settings.size_mb_limit
+        PDFSummaryService,
+        file_size_mb_limit=config.pdf_settings.size_mb_limit,
+        openai_client=openai_client,
     )
 
 

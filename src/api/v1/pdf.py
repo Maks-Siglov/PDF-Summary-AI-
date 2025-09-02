@@ -1,3 +1,5 @@
+import json
+
 from dependency_injector.wiring import Provide, inject
 from fastapi import APIRouter, Depends, File, Response, UploadFile
 
@@ -24,7 +26,10 @@ async def summary_pdf(
     """Upload and process PDF file."""
 
     try:
-        await pdf_summary_service.get_pdf_summary(file)
+        summary = await pdf_summary_service.get_pdf_summary(file)
+        return Response(
+            status_code=200, content=json.dumps({"summary": summary})
+        )
     except WrongFileFormatException:
         return Response(status_code=400, content="Only PDF files are allowed")
     except TooLargeFileException:
